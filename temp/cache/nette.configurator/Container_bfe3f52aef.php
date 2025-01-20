@@ -1,13 +1,14 @@
 <?php
 // source: /home/lukas/zaznamnik-snu/config/common.neon
 // source: /home/lukas/zaznamnik-snu/config/services.neon
+// source: /home/lukas/zaznamnik-snu/config/local.neon
 // source: array
 
 /** @noinspection PhpParamsInspection,PhpMethodMayBeStaticInspection */
 
 declare(strict_types=1);
 
-class Container_87be5df932 extends Nette\DI\Container
+class Container_bfe3f52aef extends Nette\DI\Container
 {
 	protected array $aliases = [
 		'application' => 'application.application',
@@ -202,7 +203,12 @@ class Container_87be5df932 extends Nette\DI\Container
 
 	public function createServiceDatabase__default__connection(): Nette\Database\Connection
 	{
-		$service = new Nette\Database\Connection('sqlite::memory:', null, null, []);
+		$service = new Nette\Database\Connection(
+			'mysql:host=127.0.0.1;dbname=dreams',
+			/*sensitive{*/'root'/*}*/,
+			/*sensitive{*/'root'/*}*/,
+			[],
+		);
 		Nette\Bridges\DatabaseTracy\ConnectionPanel::initialize(
 			$service,
 			true,
@@ -264,7 +270,7 @@ class Container_87be5df932 extends Nette\DI\Container
 	{
 		return new class ($this) implements Nette\Bridges\ApplicationLatte\LatteFactory {
 			public function __construct(
-				private Container_87be5df932 $container,
+				private Container_bfe3f52aef $container,
 			) {
 			}
 

@@ -5,7 +5,7 @@ return array (
     'App\\UI\\Home\\HomePresenter' => 
     array (
       0 => '/home/lukas/zaznamnik-snu/app/UI/Home/HomePresenter.php',
-      1 => 1736819135,
+      1 => 1737375820,
     ),
     'App\\UI\\Accessory\\LatteExtension' => 
     array (
@@ -30,7 +30,7 @@ return array (
     'App\\Bootstrap' => 
     array (
       0 => '/home/lukas/zaznamnik-snu/app/Bootstrap.php',
-      1 => 1736819135,
+      1 => 1737375866,
     ),
   ),
   1 => 
