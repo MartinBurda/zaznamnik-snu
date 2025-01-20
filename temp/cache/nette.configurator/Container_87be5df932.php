@@ -96,6 +96,7 @@ class Container_87be5df932 extends Nette\DI\Container
 	public function createServiceApplication__1(): App\UI\Home\HomePresenter
 	{
 		$service = new App\UI\Home\HomePresenter($this->getService('database.default.explorer'));
+
 		$service->injectPrimary(
 			$this->getService('http.request'),
 			$this->getService('http.response'),

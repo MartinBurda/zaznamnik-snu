@@ -9,6 +9,12 @@ application:
 
 
 
+database:
+	dsn: 'sqlite::memory:'
+	user:
+	password:
+
+
 latte:
 	strictTypes: yes
 	strictParsing: yes

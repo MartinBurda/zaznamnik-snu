@@ -11,6 +11,7 @@ return array (
     array (
       0 => '/home/lukas/zaznamnik-snu/app/UI/Home/HomePresenter.php',
       1 => 1737378602,
+
     ),
     'App\\UI\\Accessory\\LatteExtension' => 
     array (
@@ -36,6 +37,7 @@ return array (
     array (
       0 => '/home/lukas/zaznamnik-snu/app/Bootstrap.php',
       1 => 1737375866,
+
     ),
   ),
   1 => 

@@ -124,5 +124,11 @@ final class Template_8c71426d28 extends Latte\Runtime\Template
 
    
 </div>';
+	/** {block content} on line 3 */
+	public function blockContent(array $ʟ_args): void
+	{
+		echo '
+
+';
 	}
 }

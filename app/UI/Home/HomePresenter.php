@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace App\UI\Home;
 use Nette\Database\Explorer;
 use Nette\Application\UI\Form;
+
+
 use Nette;
 
 
@@ -83,4 +85,5 @@ final class HomePresenter extends Nette\Application\UI\Presenter
         $this->flashMessage('Sen byl úspěšně smazán.', 'success');
         $this->redirect('this');
     }
+
 }
