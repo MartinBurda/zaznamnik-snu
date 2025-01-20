@@ -10,7 +10,7 @@ return array (
     'App\\UI\\Home\\HomePresenter' => 
     array (
       0 => '/home/lukas/zaznamnik-snu/app/UI/Home/HomePresenter.php',
-      1 => 1737377605,
+      1 => 1737378602,
     ),
     'App\\UI\\Accessory\\LatteExtension' => 
     array (

@@ -20,7 +20,7 @@ final class HomePresenter extends Nette\Application\UI\Presenter
     public function renderDefault(?string $name = null, ?int $category = null): void
     {
         // Dotaz na sny
-        $dreams = $this->database->table('dreams');
+        $dreams = $this->database->table('dreams')->order('created_at DESC');
     
         // Filtrace podle názvu snu
         if ($name) {
