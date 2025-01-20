@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace App\UI\Home;
+namespace App\UI\Dream;
 use Nette\Database\Explorer;
 use Nette\Application\UI\Form;
 use Nette;
 
 
-final class HomePresenter extends Nette\Application\UI\Presenter
+final class DreamPresenter extends Nette\Application\UI\Presenter
 {
     private Nette\Database\Explorer $database;
 
@@ -17,22 +17,6 @@ final class HomePresenter extends Nette\Application\UI\Presenter
         $this->database = $database;
     }
 
-    public function renderDefault(?string $search = null, ?int $category = null): void
-    {
-        // Dotaz na snů (dreams)
-       
-    
-        $dreams = $this->database->table('dreams')->fetchAll();
-        
-        // Načtení kategorií pro snění
-        $categories = $this->database->table('dream_categories')->fetchPairs('id', 'name');
-    
-        // Přiřazení kategorií k snům
-      
-    
-        $this->template->dreams = $dreams;
-        $this->template->categories = $categories;
-    }
 
     protected function createComponentAddDreamForm(): Form
     {

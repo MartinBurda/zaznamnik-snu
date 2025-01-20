@@ -8,11 +8,6 @@ application:
 	mapping: App\UI\*\**Presenter
 
 
-database:
-	dsn: 'sqlite::memory:'
-	user:
-	password:
-
 
 latte:
 	strictTypes: yes

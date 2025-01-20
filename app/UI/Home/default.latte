@@ -3,3 +3,30 @@
 {block content}
 
 
+<div>
+    <h1>Záznamník snů</h1>
+	<a n:href="Dream:default">Přidat sen</a>
+    <form method="get" action="{plink default}">
+        <input type="text" name="search" placeholder="Hledat sny..." value="{$presenter->getParameter('search')}">
+        <select name="category">
+            <option value="">Všechny kategorie</option>
+            {foreach $categories as $id => $name}
+                <option value="{$id}" n:if="$id == $presenter->getParameter('category')" selected>{$name}</option>
+            {/foreach}
+        </select>
+        <button type="submit">Hledat</button>
+    </form>
+
+    <h2>Všechny sny</h2>
+    <ul>
+        {foreach $dreams as $dream}
+            <li>
+                <h3>{$dream->name}</h3>
+                <p><strong>Kategorie:</strong> {$dream->name}</p>
+                <p>{$dream->description}</p>
+            </li>
+        {/foreach}
+    </ul>
+
+   
+</div>
