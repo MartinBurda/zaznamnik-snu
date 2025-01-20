@@ -1,4 +1,25 @@
-<!DOCTYPE html>
+<?php
+
+declare(strict_types=1);
+
+use Latte\Runtime as LR;
+
+/** source: /root/zaznamnik-snu/app/UI/Home/default.latte */
+final class Template_292a389324 extends Latte\Runtime\Template
+{
+	public const Source = '/root/zaznamnik-snu/app/UI/Home/default.latte';
+
+
+	public function main(array $ʟ_args): void
+	{
+		extract($ʟ_args);
+		unset($ʟ_args);
+
+		if ($this->global->snippetDriver?->renderSnippets($this->blocks[self::LayerSnippet], $this->params)) {
+			return;
+		}
+
+		echo '<!DOCTYPE html>
 <html lang="cs">
 <head>
     <meta charset="UTF-8">
@@ -84,26 +105,50 @@
                     <h3>Objevte a zorganizujte své sny</h3>
                 </hgroup>
                 <a href="Dream:default" class="button">Přidat sen</a>
-                <form method="get" action="{plink default}" class="grid">
-                    <input type="text" name="search" placeholder="Hledat sny..." value="{$presenter->getParameter('search')}">
+                <form method="get" action="';
+		echo LR\Filters::escapeHtmlAttr($this->global->uiPresenter->link('default')) /* line 87 */;
+		echo '" class="grid">
+                    <input type="text" name="search" placeholder="Hledat sny..." value="';
+		echo LR\Filters::escapeHtmlAttr($presenter->getParameter('search')) /* line 88 */;
+		echo '">
                     <select name="category">
                         <option value="">Všechny kategorie</option>
-                        {foreach $categories as $id => $name}
-                            <option value="{$id}" n:if="$id == $presenter->getParameter('category')" selected>{$name}</option>
-                        {/foreach}
-                    </select>
+';
+		foreach ($categories as $id => $name) /* line 91 */ {
+			if ($id == $presenter->getParameter('category')) /* line 92 */ {
+				echo '                            <option value="';
+				echo LR\Filters::escapeHtmlAttr($id) /* line 92 */;
+				echo '" selected>';
+				echo LR\Filters::escapeHtmlText($name) /* line 92 */;
+				echo '</option>
+';
+			}
+
+		}
+
+		echo '                    </select>
                     <button type="submit">Hledat</button>
                 </form>
                 <h2>Všechny sny</h2>
                 <ul>
-                    {foreach $dreams as $dream}
-                        <li>
-                            <h3>{$dream->name}</h3>
-                            <p><strong>Kategorie:</strong> {$dream->name}</p>
-                            <p>{$dream->description}</p>
+';
+		foreach ($dreams as $dream) /* line 99 */ {
+			echo '                        <li>
+                            <h3>';
+			echo LR\Filters::escapeHtmlText($dream->name) /* line 101 */;
+			echo '</h3>
+                            <p><strong>Kategorie:</strong> ';
+			echo LR\Filters::escapeHtmlText($dream->name) /* line 102 */;
+			echo '</p>
+                            <p>';
+			echo LR\Filters::escapeHtmlText($dream->description) /* line 103 */;
+			echo '</p>
                         </li>
-                    {/foreach}
-                </ul>
+';
+
+		}
+
+		echo '                </ul>
             </section>
         </div>
     </main>
@@ -112,3 +157,19 @@
     </footer>
 </body>
 </html>
+';
+	}
+
+
+	public function prepare(): array
+	{
+		extract($this->params);
+
+		if (!$this->getReferringTemplate() || $this->getReferenceType() === 'extends') {
+			foreach (array_intersect_key(['id' => '91', 'name' => '91', 'dream' => '99'], $this->params) as $ʟ_v => $ʟ_l) {
+				trigger_error("Variable \$$ʟ_v overwritten in foreach on line $ʟ_l");
+			}
+		}
+		return get_defined_vars();
+	}
+}
