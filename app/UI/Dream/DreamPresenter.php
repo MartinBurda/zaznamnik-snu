@@ -16,7 +16,14 @@ final class DreamPresenter extends Nette\Application\UI\Presenter
     {
         $this->database = $database;
     }
+    public function renderEdit($id): void
+    {
+        $dream = $this->database->table('dreams')->get($id);
 
+        
+        $this->getComponent('addDreamForm')
+            ->setDefaults($dream->toArray());
+    }
 
     protected function createComponentAddDreamForm(): Form
     {
@@ -31,7 +38,7 @@ final class DreamPresenter extends Nette\Application\UI\Presenter
             ->setPrompt('Vyberte kategorii')
             ->setRequired('Vyberte kategorii.');
 
-        $form->addSubmit('submit', 'Přidat sen');
+        $form->addSubmit('submit', 'Odeslat');
         $form->onSuccess[] = [$this, 'addDreamFormSucceeded'];
         return $form;
     }
@@ -45,6 +52,6 @@ final class DreamPresenter extends Nette\Application\UI\Presenter
         ]);
 
         $this->flashMessage('Sen byl úspěšně přidán.', 'success');
-        $this->redirect('this');
+        $this->redirect('Home:');
     } 
 }

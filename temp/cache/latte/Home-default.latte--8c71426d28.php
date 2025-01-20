@@ -80,25 +80,31 @@ final class Template_8c71426d28 extends Latte\Runtime\Template
     </form>
 
     <h2>Všechny sny</h2>
-    <ul>
+<ul>
 ';
 		foreach ($dreams as $dream) /* line 22 */ {
-			echo '            <li>
-                <h3>';
+			echo '        <li>
+            <h3>';
 			echo LR\Filters::escapeHtmlText($dream->name) /* line 24 */;
 			echo '</h3>
-                <p><strong>Kategorie:</strong> ';
+            <p><strong>Kategorie:</strong> ';
 			echo LR\Filters::escapeHtmlText($dream->name) /* line 25 */;
 			echo '</p>
-                <p>';
+            <p>';
 			echo LR\Filters::escapeHtmlText($dream->description) /* line 26 */;
 			echo '</p>
-            </li>
+            <a href="';
+			echo LR\Filters::escapeHtmlAttr($this->global->uiControl->link('Dream:edit', [$dream->id])) /* line 27 */;
+			echo '">Edit</a>
+            <a href="';
+			echo LR\Filters::escapeHtmlAttr($this->global->uiControl->link('Delete!', [$dream->id])) /* line 28 */;
+			echo '" onclick="return confirm(\'Opravdu chcete tento sen smazat?\')">Delete</a>
+        </li>
 ';
 
 		}
 
-		echo '    </ul>
+		echo '</ul>
 
    
 </div>';

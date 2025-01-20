@@ -2,10 +2,15 @@
 return array (
   0 => 
   array (
+    'App\\UI\\Dream\\DreamPresenter' => 
+    array (
+      0 => '/home/lukas/zaznamnik-snu/app/UI/Dream/DreamPresenter.php',
+      1 => 1737376796,
+    ),
     'App\\UI\\Home\\HomePresenter' => 
     array (
       0 => '/home/lukas/zaznamnik-snu/app/UI/Home/HomePresenter.php',
-      1 => 1737375820,
+      1 => 1737376911,
     ),
     'App\\UI\\Accessory\\LatteExtension' => 
     array (

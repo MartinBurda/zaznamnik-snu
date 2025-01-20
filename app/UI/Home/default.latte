@@ -18,15 +18,17 @@
     </form>
 
     <h2>Všechny sny</h2>
-    <ul>
-        {foreach $dreams as $dream}
-            <li>
-                <h3>{$dream->name}</h3>
-                <p><strong>Kategorie:</strong> {$dream->name}</p>
-                <p>{$dream->description}</p>
-            </li>
-        {/foreach}
-    </ul>
+<ul>
+    {foreach $dreams as $dream}
+        <li>
+            <h3>{$dream->name}</h3>
+            <p><strong>Kategorie:</strong> {$dream->name}</p>
+            <p>{$dream->description}</p>
+            <a n:href="Dream:edit , $dream->id">Edit</a>
+            <a n:href="Delete!, $dream->id" onclick="return confirm('Opravdu chcete tento sen smazat?')">Delete</a>
+        </li>
+    {/foreach}
+</ul>
 
    
 </div>

@@ -63,4 +63,10 @@ final class HomePresenter extends Nette\Application\UI\Presenter
         $this->flashMessage('Sen byl úspěšně přidán.', 'success');
         $this->redirect('this');
     } 
+    public function handleDelete($id)
+    {
+        $this->database->table('dreams')->wherePrimary($id)->delete();
+        $this->flashMessage('Sen byl úspěšně smazán.', 'success');
+        $this->redirect('this');
+    }
 }
