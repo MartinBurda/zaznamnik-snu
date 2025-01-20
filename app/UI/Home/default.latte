@@ -3,3 +3,45 @@
 {block content}
 
 
+<div>
+    <h1>Záznamník snů</h1>
+	<a n:href="Dream:default">Přidat sen</a>
+    <section class="mb-5 library-filter">
+    <h2 class="mb-3">Filtrování</h2>
+    <form n:name="filterForm" class="row g-3">
+        <div class="col-md-6">
+            <label for="name" class="form-label">Název snu:</label>
+            <input type="text" name="name" class="form-control" placeholder="Zadejte název snu">
+        </div>
+        <div class="col-md-6">
+            <label for="category" class="form-label">Kategorie:</label>
+            <select name="category" class="form-select">
+                <option value="">Všechny kategorie</option>
+                {foreach $categories as $id => $category}
+                    <option value="{$id}">{$category}</option>
+                {/foreach}
+            </select>
+        </div>
+        <div class="col-12">
+            <button type="submit" class="btn btn-primary">
+                Filtrovat
+            </button>
+        </div>
+    </form>
+</section>
+
+    <h2>Všechny sny</h2>
+<ul>
+    {foreach $dreams as $dream}
+        <li>
+            <h3>{$dream->name}</h3>
+            <p><strong>Kategorie:</strong> {$dream->category->name}</p>
+            <p>{$dream->description}</p>
+            <a n:href="Dream:edit , $dream->id">Edit</a>
+            <a n:href="Delete!, $dream->id" onclick="return confirm('Opravdu chcete tento sen smazat?')">Delete</a>
+        </li>
+    {/foreach}
+</ul>
+
+   
+</div>

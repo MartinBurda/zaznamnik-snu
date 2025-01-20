@@ -2,10 +2,16 @@
 return array (
   0 => 
   array (
+    'App\\UI\\Dream\\DreamPresenter' => 
+    array (
+      0 => '/home/lukas/zaznamnik-snu/app/UI/Dream/DreamPresenter.php',
+      1 => 1737377180,
+    ),
     'App\\UI\\Home\\HomePresenter' => 
     array (
       0 => '/home/lukas/zaznamnik-snu/app/UI/Home/HomePresenter.php',
-      1 => 1736819135,
+      1 => 1737378602,
+
     ),
     'App\\UI\\Accessory\\LatteExtension' => 
     array (
@@ -30,15 +36,20 @@ return array (
     'App\\Bootstrap' => 
     array (
       0 => '/home/lukas/zaznamnik-snu/app/Bootstrap.php',
-      1 => 1736819135,
+      1 => 1737375866,
+
     ),
   ),
   1 => 
   array (
-    'Nette\\Bridges\\Assets\\DIExtension' => 1,
-    'null' => 1,
+    'Nette\\Bridges\\Assets\\DIExtension' => 3,
+    'null' => 3,
     'App\\UI\\Home\\HomeDefaultTemplate' => 3,
     'App\\UI\\Home\\HomeTemplate' => 3,
+    'App\\UI\\Dream\\DreamDefaultTemplate' => 3,
+    'App\\UI\\Dream\\DreamTemplate' => 3,
+    'App\\UI\\Dream\\DreamEditTemplate' => 3,
+
   ),
   2 => 
   array (
