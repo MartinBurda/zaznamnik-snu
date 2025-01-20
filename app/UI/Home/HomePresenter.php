@@ -17,52 +17,66 @@ final class HomePresenter extends Nette\Application\UI\Presenter
         $this->database = $database;
     }
 
-    public function renderDefault(?string $search = null, ?int $category = null): void
+    public function renderDefault(?string $name = null, ?int $category = null): void
     {
-        // Dotaz na snů (dreams)
-       
+        // Dotaz na sny
+        $dreams = $this->database->table('dreams');
     
-        $dreams = $this->database->table('dreams')->fetchAll();
-        
-        // Načtení kategorií pro snění
+        // Filtrace podle názvu snu
+        if ($name) {
+            $dreams->where('name LIKE ?', "%$name%");
+        }
+    
+        // Filtrace podle kategorie
+        if ($category) {
+            $dreams->where('category_id', $category);
+        }
+    
+        // Načtení kategorií pro výběr v šabloně
         $categories = $this->database->table('dream_categories')->fetchPairs('id', 'name');
     
-        // Přiřazení kategorií k snům
-      
-    
-        $this->template->dreams = $dreams;
+        // Předání dat do šablony
+        $this->template->dreams = $dreams->fetchAll();
         $this->template->categories = $categories;
     }
 
-    protected function createComponentAddDreamForm(): Form
+    
+    protected function createComponentFilterForm(): Form
     {
         $form = new Form;
-        $form->addText('name', 'Název:')
-            ->setRequired('Zadejte název snu.');
-
-        $form->addTextArea('description', 'Popis:')
-            ->setRequired('Zadejte popis snu.');
-
-        $form->addSelect('category_id', 'Kategorie:', $this->database->table('dream_categories')->fetchPairs('id', 'name'))
-            ->setPrompt('Vyberte kategorii')
-            ->setRequired('Vyberte kategorii.');
-
-        $form->addSubmit('submit', 'Přidat sen');
-        $form->onSuccess[] = [$this, 'addDreamFormSucceeded'];
+    
+        // Přidání textového pole pro název snu
+        $form->addText('name', 'Název snu:')
+            ->setHtmlAttribute('placeholder', 'Zadejte název snu');
+    
+        // Přidání výběrového pole pro kategorie
+        $form->addSelect('category', 'Kategorie:', $this->getCategories())
+            ->setPrompt('Všechny kategorie');
+    
+        // Přidání tlačítka pro filtraci
+        $form->addSubmit('filter', 'Filtrovat');
+    
+        // Zpracování úspěšného odeslání formuláře
+        $form->onSuccess[] = [$this, 'filterFormSucceeded'];
+    
         return $form;
     }
-
-    public function addDreamFormSucceeded(Form $form, array $values): void
+    public function filterFormSucceeded(Form $form, \stdClass $values): void
+{
+    // Předání filtrů do URL (pro použití v renderování)
+    $this->redirect('this', [
+        'name' => $values->name,
+        'category' => $values->category,
+    ]);
+}
+    
+    // Pomocná metoda pro získání kategorií z databáze
+    private function getCategories(): array
     {
-        $this->database->table('dreams')->insert([
-            'name' => $values['name'],
-            'description' => $values['description'],
-            'category_id' => $values['category_id'],
-        ]);
-
-        $this->flashMessage('Sen byl úspěšně přidán.', 'success');
-        $this->redirect('this');
-    } 
+        // Načtení kategorií z tabulky 'dream_categories'
+        $categories = $this->database->table('dream_categories')->fetchPairs('id', 'name');
+        return $categories;
+    }
     public function handleDelete($id)
     {
         $this->database->table('dreams')->wherePrimary($id)->delete();

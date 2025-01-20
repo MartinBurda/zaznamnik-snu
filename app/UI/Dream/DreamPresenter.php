@@ -45,11 +45,24 @@ final class DreamPresenter extends Nette\Application\UI\Presenter
 
     public function addDreamFormSucceeded(Form $form, array $values): void
     {
-        $this->database->table('dreams')->insert([
-            'name' => $values['name'],
-            'description' => $values['description'],
-            'category_id' => $values['category_id'],
-        ]);
+        $id = $this->getParameter('id');
+        if($id)
+        {
+            $this->database->table('dreams')->wherePrimary($id)->update([
+                'name' => $values['name'],
+                'description' => $values['description'],
+                'category_id' => $values['category_id'],
+            ]);
+            $this->flashMessage('Sen byl úspěšně upraven.', 'success');
+            $this->redirect('Home:');
+        }else{
+            $this->database->table('dreams')->insert([
+                'name' => $values['name'],
+                'description' => $values['description'],
+                'category_id' => $values['category_id'],
+            ]);
+        }
+       
 
         $this->flashMessage('Sen byl úspěšně přidán.', 'success');
         $this->redirect('Home:');

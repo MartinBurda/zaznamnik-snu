@@ -32,7 +32,7 @@ final class Template_8c71426d28 extends Latte\Runtime\Template
 		extract($this->params);
 
 		if (!$this->getReferringTemplate() || $this->getReferenceType() === 'extends') {
-			foreach (array_intersect_key(['id' => '13', 'name' => '13', 'dream' => '22'], $this->params) as $ʟ_v => $ʟ_l) {
+			foreach (array_intersect_key(['id' => '20', 'category' => '20', 'dream' => '35'], $this->params) as $ʟ_v => $ʟ_l) {
 				trigger_error("Variable \$$ʟ_v overwritten in foreach on line $ʟ_l");
 			}
 		}
@@ -54,50 +54,66 @@ final class Template_8c71426d28 extends Latte\Runtime\Template
 	<a href="';
 		echo LR\Filters::escapeHtmlAttr($this->global->uiControl->link('Dream:default')) /* line 8 */;
 		echo '">Přidat sen</a>
-    <form method="get" action="';
-		echo LR\Filters::escapeHtmlAttr($this->global->uiPresenter->link('default')) /* line 9 */;
-		echo '">
-        <input type="text" name="search" placeholder="Hledat sny..." value="';
-		echo LR\Filters::escapeHtmlAttr($presenter->getParameter('search')) /* line 10 */;
-		echo '">
-        <select name="category">
-            <option value="">Všechny kategorie</option>
+    <section class="mb-5 library-filter">
+    <h2 class="mb-3">Filtrování</h2>
 ';
-		foreach ($categories as $id => $name) /* line 13 */ {
-			if ($id == $presenter->getParameter('category')) /* line 14 */ {
-				echo '                <option value="';
-				echo LR\Filters::escapeHtmlAttr($id) /* line 14 */;
-				echo '" selected>';
-				echo LR\Filters::escapeHtmlText($name) /* line 14 */;
-				echo '</option>
+		$form = $this->global->formsStack[] = $this->global->uiControl['filterForm'] /* line 11 */;
+		Nette\Bridges\FormsLatte\Runtime::initializeForm($form);
+		echo '    <form';
+		echo Nette\Bridges\FormsLatte\Runtime::renderFormBegin(end($this->global->formsStack), ['class' => null], false) /* line 11 */;
+		echo ' class="row g-3">
+        <div class="col-md-6">
+            <label for="name" class="form-label">Název snu:</label>
+            <input type="text" name="name" class="form-control" placeholder="Zadejte název snu">
+        </div>
+        <div class="col-md-6">
+            <label for="category" class="form-label">Kategorie:</label>
+            <select name="category" class="form-select">
+                <option value="">Všechny kategorie</option>
 ';
-			}
+		foreach ($categories as $id => $category) /* line 20 */ {
+			echo '                    <option value="';
+			echo LR\Filters::escapeHtmlAttr($id) /* line 21 */;
+			echo '">';
+			echo LR\Filters::escapeHtmlText($category) /* line 21 */;
+			echo '</option>
+';
 
 		}
 
-		echo '        </select>
-        <button type="submit">Hledat</button>
-    </form>
+		echo '            </select>
+        </div>
+        <div class="col-12">
+            <button type="submit" class="btn btn-primary">
+                Filtrovat
+            </button>
+        </div>
+    ';
+		echo Nette\Bridges\FormsLatte\Runtime::renderFormEnd(end($this->global->formsStack), false) /* line 11 */;
+		echo '</form>
+';
+		array_pop($this->global->formsStack);
+		echo '</section>
 
     <h2>Všechny sny</h2>
 <ul>
 ';
-		foreach ($dreams as $dream) /* line 22 */ {
+		foreach ($dreams as $dream) /* line 35 */ {
 			echo '        <li>
             <h3>';
-			echo LR\Filters::escapeHtmlText($dream->name) /* line 24 */;
+			echo LR\Filters::escapeHtmlText($dream->name) /* line 37 */;
 			echo '</h3>
             <p><strong>Kategorie:</strong> ';
-			echo LR\Filters::escapeHtmlText($dream->name) /* line 25 */;
+			echo LR\Filters::escapeHtmlText($dream->category->name) /* line 38 */;
 			echo '</p>
             <p>';
-			echo LR\Filters::escapeHtmlText($dream->description) /* line 26 */;
+			echo LR\Filters::escapeHtmlText($dream->description) /* line 39 */;
 			echo '</p>
             <a href="';
-			echo LR\Filters::escapeHtmlAttr($this->global->uiControl->link('Dream:edit', [$dream->id])) /* line 27 */;
+			echo LR\Filters::escapeHtmlAttr($this->global->uiControl->link('Dream:edit', [$dream->id])) /* line 40 */;
 			echo '">Edit</a>
             <a href="';
-			echo LR\Filters::escapeHtmlAttr($this->global->uiControl->link('Delete!', [$dream->id])) /* line 28 */;
+			echo LR\Filters::escapeHtmlAttr($this->global->uiControl->link('Delete!', [$dream->id])) /* line 41 */;
 			echo '" onclick="return confirm(\'Opravdu chcete tento sen smazat?\')">Delete</a>
         </li>
 ';

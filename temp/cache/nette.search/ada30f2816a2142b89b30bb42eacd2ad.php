@@ -5,12 +5,12 @@ return array (
     'App\\UI\\Dream\\DreamPresenter' => 
     array (
       0 => '/home/lukas/zaznamnik-snu/app/UI/Dream/DreamPresenter.php',
-      1 => 1737376796,
+      1 => 1737377180,
     ),
     'App\\UI\\Home\\HomePresenter' => 
     array (
       0 => '/home/lukas/zaznamnik-snu/app/UI/Home/HomePresenter.php',
-      1 => 1737376911,
+      1 => 1737377605,
     ),
     'App\\UI\\Accessory\\LatteExtension' => 
     array (
